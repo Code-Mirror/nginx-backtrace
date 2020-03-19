@@ -1,24 +1,35 @@
+ngx_addon_name=ngx_backtrace_module
+if test -n "$ngx_module_link"; then
+    ngx_module_type=HTTP
+    ngx_module_name=$ngx_addon_name
+    ngx_module_incs=
+    ngx_module_deps=
+    ngx_module_srcs="$ngx_addon_dir/ngx_backtrace_module.c"
+    ngx_module_libs="-rdynamic -fno-omit-frame-pointer -lexecinfo"
+
+    . auto/module
+else
+HTTP_MODULES="$HTTP_MODULES ngx_backtrace_module"
+NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_backtrace_module.c"
+fi
+#LINK="$LINK -rdynamic -lexecinfo"
+
 ngx_feature="BACKTRACE"
 ngx_feature_name=
 ngx_feature_run=no
 ngx_feature_incs="#include <execinfo.h>"
 ngx_feature_path=
 ngx_feature_test="void *buffer[10];
-backtrace(buffer, sizeof(buffer) / sizeof(buffer[0]));"
+                  backtrace(buffer, sizeof(buffer) / sizeof(buffer[0]));"
 . auto/feature
 
 if [ $ngx_found = no ]; then
-
     cat << END
-
-$0: error: the backtrace module requires backtrace function.
-You can either do not enable the module or update your libc library.
-
+    
+    $0: error: the backtrace module requires backtrace function.
+    You can either do not enable the module or update your libc library.
+    
 END
-    exit 1
-fi
 
-ngx_addon_name=ngx_backtrace_module
-LINK="$LINK -rdynamic"
-HTTP_MODULES="$HTTP_MODULES ngx_backtrace_module"
-NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_backtrace_module.c"
+#    exit 1
+fi
