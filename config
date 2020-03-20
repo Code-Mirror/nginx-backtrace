@@ -5,13 +5,15 @@ if test -n "$ngx_module_link"; then
     ngx_module_incs=
     ngx_module_deps=
     ngx_module_srcs="$ngx_addon_dir/ngx_backtrace_module.c"
-    ngx_module_libs="-rdynamic -fno-omit-frame-pointer -lexecinfo"
+    ngx_module_libs="-lexecinfo"
 
     . auto/module
 else
 HTTP_MODULES="$HTTP_MODULES ngx_backtrace_module"
 NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_backtrace_module.c"
 fi
+CORE_LIBS="$CORE_LIBS -lexecinfo"
+CFLAGS="$CFLAGS -rdynamic -fno-omit-frame-pointer -export-dynamic"
 #LINK="$LINK -rdynamic -lexecinfo"
 
 #ngx_feature="BACKTRACE"
