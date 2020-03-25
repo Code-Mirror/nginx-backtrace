@@ -12,8 +12,8 @@ else
 HTTP_MODULES="$HTTP_MODULES ngx_backtrace_module"
 NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_backtrace_module.c"
 fi
-CORE_LIBS="$CORE_LIBS -lexecinfo"
-CFLAGS="$CFLAGS -rdynamic -fno-omit-frame-pointer -export-dynamic"
+#CORE_LIBS="$CORE_LIBS -lexecinfo"
+CFLAGS="$CFLAGS -rdynamic -fno-omit-frame-pointer"
 #LINK="$LINK -rdynamic -lexecinfo"
 
 #ngx_feature="BACKTRACE"
