@@ -10,7 +10,7 @@
 #include <execinfo.h>
 
 
-#define NGX_BACKTRACE_DEFAULT_STACK_MAX_SIZE 30
+#define NGX_BACKTRACE_DEFAULT_STACK_MAX_SIZE 128
 
 
 typedef struct {
