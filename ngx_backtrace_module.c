@@ -159,6 +159,7 @@ ngx_error_signal_handler(int signo)
 
     size = backtrace(buffer, bcf->max_stack_size);
     backtrace_symbols_fd(buffer, size, log->file->fd);
+    fsync(log->file->fd);
 
 invalid:
 
